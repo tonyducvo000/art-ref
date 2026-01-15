@@ -51,7 +51,9 @@ export default function Toolbar({
         }}
       >
         <option value="solid">Solid</option>
+        <option value="overlay">Overlay</option>
         <option value="wireframe">Wireframe</option>
+        
       </select>
     </div>
   )

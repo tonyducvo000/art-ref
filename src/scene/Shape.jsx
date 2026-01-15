@@ -1,36 +1,64 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { Edges } from '@react-three/drei'
 import { GEOMETRIES } from '../geometry/geometries'
 
-export default function Shape({ geometryType, viewMode, autoRotate, rotationSpeed }) {
+export default function Shape({
+  geometryType = 'box',
+  viewMode = 'solid',  // 'solid' | 'overlay' | 'wireframe'
+  autoRotate,
+  rotationSpeed,
+}) {
   const groupRef = useRef()
   const Geometry = GEOMETRIES[geometryType].component
 
-  // 🔑 keep latest autoRotate value for useFrame
-  const autoRotateRef = useRef(autoRotate)
-
-  useEffect(() => {
-    autoRotateRef.current = autoRotate
-  }, [autoRotate])
-
   useFrame((_, delta) => {
     if (!autoRotate || !groupRef.current) return
-    // if (!autoRotateRef.current) return // HARD STOP
 
-    groupRef.current.rotation.y += delta * rotationSpeed 
-    groupRef.current.rotation.x += delta * 0.5 * rotationSpeed
+    groupRef.current.rotation.y += delta * rotationSpeed
+    groupRef.current.rotation.x += delta * rotationSpeed * 0.5
   })
 
   return (
     <group ref={groupRef}>
-      <mesh scale={1.6}>
-        <Geometry />
-        <meshStandardMaterial
-          color="#d9d9d9"
-          roughness={0.6}
-          wireframe={viewMode === 'wireframe'}
-        />
-      </mesh>
+      {/* SOLID MODE */}
+      {viewMode !== 'wireframe' && (
+        <mesh scale={1.6}>
+          <Geometry />
+          <meshStandardMaterial
+            color="#d9d9d9"
+            roughness={0.6}
+          />
+
+          {/* Crease edges only in solid/overlay */}
+          <Edges color="#444" threshold={15} />
+        </mesh>
+      )}
+
+      {/* WIREFRAME OVERLAY */}
+      {viewMode === 'overlay' && (
+        <mesh scale={1.6}>
+          <Geometry />
+          <meshBasicMaterial
+            color="#000"
+            wireframe
+            transparent
+            opacity={0.35}
+            depthTest={false}
+          />
+        </mesh>
+      )}
+
+      {/* PURE WIREFRAME */}
+      {viewMode === 'wireframe' && (
+        <mesh scale={1.6}>
+          <Geometry />
+          <meshBasicMaterial
+            color="#000"
+            wireframe
+          />
+        </mesh>
+      )}
     </group>
   )
 }
