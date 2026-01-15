@@ -1,4 +1,5 @@
 // src/geometry/geometries.jsx
+import { Lathe, Polyhedron, Tetrahedron } from '@react-three/drei'
 import * as THREE from 'three'
 
 
@@ -7,6 +8,35 @@ export const GEOMETRIES = {
     label: 'Box',
     component: () => <boxGeometry args={[1, 1, 1]} />,
   },
+ 
+  circle: {
+    label: 'Circle',
+    component: () => <circleGeometry args={[0.8, 32]} />,
+  },
+
+  edges: {
+    label: 'Edges',
+    component: () => <edgesGeometry args={[new THREE.BoxGeometry(1, 1, 1)]} />,
+  },
+
+
+  Lathe: {
+    label: 'Lathe',
+    component: () => {
+      const points = [
+        new THREE.Vector2(0.5, 0),
+        new THREE.Vector2(0.3, 0.2),
+        new THREE.Vector2(0.1, 0.4),
+        new THREE.Vector2(0, 0.6),
+        new THREE.Vector2(0.1, 0.8),
+        new THREE.Vector2(0.3, 1),
+        new THREE.Vector2(0.5, 1),
+      ]
+
+      return <latheGeometry args={[points, 32]} />
+    },
+  },
+
   sphere: {
     label: 'Sphere',
     component: () => <sphereGeometry args={[0.75, 32, 32]} />,
@@ -41,6 +71,7 @@ export const GEOMETRIES = {
     <torusKnotGeometry args={[0.6, 0.2, 128, 16]} />
   ),
 }, 
+
 tube: {
   label: 'Tube',
   component: () => {
@@ -78,6 +109,13 @@ octahedron: {
   ),
 },
 
+Polyhedron: {
+  label: 'Polyhedron',
+  component: () => (
+    <polyhedronGeometry args={[20, 2, 20]} />
+  ),
+},
+
 plane: {
   label: 'Plane',
   component: () => (
@@ -89,6 +127,29 @@ ring: {
   label: 'Ring',
   component: () => (
     <ringGeometry args={[0.4, 0.8, 32]} />
+  ),
+},
+
+// shape: {
+//   label: 'Shape',
+//   component: () => {      
+//     const shape = new THREE.Shape()
+//     shape.moveTo(0, 0)
+//     shape.lineTo(1, 0)
+//     shape.lineTo(1, 1)
+//     shape.lineTo(0, 1)
+//     shape.lineTo(0, 0)
+
+//     return (
+//       <shapeGeometry args={[shape]} />
+//     )
+//   },
+// },
+
+Tetrahedron: {
+  label: 'Tetrahedron',
+  component: () => (
+    <tetrahedronGeometry args={[0.8]} />
   ),
 },
 

@@ -54,7 +54,7 @@ export default function App() {
                    right: 200,
                    zIndex: 10,
                    padding: '10px 14px',
-                   color: '#D3D3D3',
+                   color: '#000000ff',
 
                 }}>
           Rotation Speed: {rotationSpeed.toFixed(2)}
@@ -89,7 +89,7 @@ export default function App() {
 
     <Canvas camera={{ position: [5, 5, 5], fov: 35 }}   gl={{ antialias: true }}
 >
-        <color attach="background" args={['#1e1e1e']} />
+        <color attach="background" args={['#d8e7f2']} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
 
