@@ -109,12 +109,12 @@ octahedron: {
   ),
 },
 
-Polyhedron: {
-  label: 'Polyhedron',
-  component: () => (
-    <polyhedronGeometry args={[20, 2, 20]} />
-  ),
-},
+// Polyhedron: {
+//   label: 'Polyhedron',
+//   component: () => (
+//     <polyhedronGeometry args={[20, 2, 20]} />
+//   ),
+// },
 
 plane: {
   label: 'Plane',
