@@ -13,7 +13,8 @@ export default function Scene({ geometryType, viewMode }) {
 
       <Shape geometryType={geometryType} viewMode={viewMode} />
 
-      <OrbitControls target={[0,0,0]}enablePan={false} />
+      <OrbitControls enableZoom={true} enableRotate={true} enablePan={true} />
+    
     </Canvas>
   )
 }
