@@ -46,6 +46,26 @@ export default function App() {
           {autoRotate ? 'Stop Rotation' : 'Start Rotation'}
       </button>
 
+      
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 8,                 // small padding from edge
+          left: '50%',               // move to center
+          transform: 'translateX(-50%)', // true centering
+          zIndex: 5,
+
+          color: '#000000',
+          fontSize: '12px',
+          letterSpacing: '0.5px',
+
+          pointerEvents: 'none',     // doesn't block canvas interaction
+          userSelect: 'none',
+        }}
+      >
+        Built by Tony Vo
+      </div>
+
       <div
         style={{
           position: 'absolute',
@@ -97,6 +117,7 @@ export default function App() {
         viewMode={viewMode}
         setViewMode={setViewMode}
       />
+         
 
       <Canvas camera={{ position: [5, 5, 5], fov: 35 }}   gl={{ antialias: true }}>
           <color attach="background" args={['#d8e7f2']} />
